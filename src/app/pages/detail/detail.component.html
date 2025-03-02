@@ -1,0 +1,9 @@
+<app-title-custom [title]="countryName" />
+
+<app-info-bar [datas]="infoBarData" />
+
+ <app-diagramme *ngIf="countryStatistics$ | async as countryStats" [data]="countryStats.countryData"></app-diagramme>
+
+<div class="menu">
+  <app-button-custom></app-button-custom>
+</div>

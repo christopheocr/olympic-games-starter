@@ -1,0 +1,21 @@
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #2C98F0;
+  color: white;
+  font-size: 1.3em;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 12px 24px;
+  border: 2px solid #1B6EBB;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.home-button:hover {
+  background-color: #1B6EBB;
+}

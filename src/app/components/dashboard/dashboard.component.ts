@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
@@ -24,6 +25,8 @@ export class DashboardComponent implements OnInit{
     group: ScaleType.Ordinal
   };
 
+  constructor(private router: Router){}
+
   ngOnInit(): void {
     this.dataList = this.participants;
   }
@@ -36,7 +39,8 @@ export class DashboardComponent implements OnInit{
   }
 
   onSelect(event: {name: string,value: number,label: string}): void {
-    console.log(event.name.trim().replace(/\s+/g, '').toLowerCase())
+    //console.log(event.name.trim().replace(/\s+/g, '').toLowerCase())
+    this.router.navigate(["/details/"+event.name.trim().replace(/\s+/g, '').toLowerCase()]);
  }
 
 }
