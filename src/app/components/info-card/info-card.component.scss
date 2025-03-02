@@ -1,0 +1,25 @@
+.jo-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0A7F89;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+  margin: 10px;
+}
+
+.jo-title {
+  color: #666;
+  font-size: 1em;
+  text-align: center;
+}
+
+.jo-value {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: black;
+  text-align: center;
+}

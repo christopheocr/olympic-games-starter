@@ -1,0 +1,5 @@
+<div class="infos-bar">
+  @for (item of elements; track $index) {
+     <app-info-card [text]="item.title" [count]="item.value"/>
+    }
+</div>

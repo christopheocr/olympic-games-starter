@@ -1,3 +1,14 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<header>
+  <app-title-custom title="Medals per country" />
+  <ng-container *ngIf="homeData$ | async as homeData">
+    <app-info-bar [datas]="[
+      { title: 'Number of JOs', value: homeData.numberJOs },
+      { title: 'Number of countries', value: homeData.numberOfCountry }
+    ]"/>
+  </ng-container>
+</header>
+<main>
+  <ng-container *ngIf="homeData$ | async as homeData">
+    <app-dashboard [participants]="homeData.elements" />
+  </ng-container>
+</main>

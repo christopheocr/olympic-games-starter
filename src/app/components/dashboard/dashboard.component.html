@@ -1,0 +1,16 @@
+<div class="dashboard">
+  <ngx-charts-pie-chart
+    [results]= "participants"
+    [view]="view"
+    [scheme]="colorScheme"
+    [gradient]="gradient"
+    [legend]="showLegend"
+    [labels]="showLabels"
+    [doughnut]="isDoughnut"
+    [trimLabels]="false"
+    [tooltipDisabled]="false"
+    [tooltipText]="customTooltip"
+    (select)="onSelect($event)"
+    >
+  </ngx-charts-pie-chart>
+</div>
