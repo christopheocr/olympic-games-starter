@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OlympicService } from './olympic.service';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,65 +9,56 @@ export class DetailPageService {
 
   constructor(private olympicService: OlympicService) { }
 
-  getAllCountries(): Observable<string[]> {
-    return this.olympicService.getOlympics().pipe(
-      map((olympics) => {
-        if (!olympics) {
-          return [];
-        }
-        return olympics.map(o => o.country);
-      })
-    );
-  }
-
   getCountryStatistics(countryName: string): Observable<{
-    totalParticipations: number,
-    totalMedals: number,
-    totalAthletes: number,
-    countryData: { name: string; series: { name: string; value: number }[] } | null
-  }> {
+    country: string;
+    totalParticipations: number;
+    totalMedals: number;
+    totalAthletes: number;
+    countryData: { name: string; series: { name: string; value: number }[] } | null;
+}> {
     return this.olympicService.getOlympics().pipe(
-      map((olympics) => {
-        if (!olympics) {
-          return {
-            totalParticipations: 0,
-            totalMedals: 0,
-            totalAthletes: 0,
-            countryData: null
-          };
-        }
+      filter(olympics => !!olympics),
+        map((olympics) => {
 
-        const countryData = olympics.find(o => o.country.toLowerCase() === countryName.toLowerCase());
+            // Normalisation du nom du pays en minuscules sans espaces
+            const formattedCountryName = countryName.toLowerCase().replace(/\s+/g, '');
 
-        if (!countryData) {
-          return {
-            totalParticipations: 0,
-            totalMedals: 0,
-            totalAthletes: 0,
-            countryData: null
-          };
-        }
+            const countryData = olympics.find(o =>
+                o.country.toLowerCase().replace(/\s+/g, '') === formattedCountryName
+            );
 
-        const totalParticipations = countryData.participations.length;
-        const totalMedals = countryData.participations.reduce((sum, p) => sum + p.medalsCount, 0);
-        const totalAthletes = countryData.participations.reduce((sum, p) => sum + p.athleteCount, 0);
+            if (!countryData) {
+                return {
+                    country: countryName,
+                    totalParticipations: 0,
+                    totalMedals: 0,
+                    totalAthletes: 0,
+                    countryData: null
+                };
+            }
 
-        const formattedData = {
-          name: countryData.country,
-          series: countryData.participations.map(p => ({
-            name: p.year.toString(),
-            value: p.medalsCount
-          }))
-        };
+            const totalParticipations = countryData.participations.length;
+            const totalMedals = countryData.participations.reduce((sum, p) => sum + p.medalsCount, 0);
+            const totalAthletes = countryData.participations.reduce((sum, p) => sum + p.athleteCount, 0);
 
-        return {
-          totalParticipations,
-          totalMedals,
-          totalAthletes,
-          countryData: formattedData
-        };
-      })
+            const formattedData = {
+                name: countryData.country,
+                series: countryData.participations.map(p => ({
+                    name: p.year.toString(),
+                    value: p.medalsCount
+                }))
+            };
+
+            return {
+                country: countryData.country,
+                totalParticipations,
+                totalMedals,
+                totalAthletes,
+                countryData: formattedData
+            };
+        })
     );
-  }
+}
+
 
 }
