@@ -1,8 +1,12 @@
-<app-title-custom [title]="countryName" />
-
-<app-info-bar [datas]="infoBarData" />
-
- <app-diagramme *ngIf="countryStatistics$ | async as countryStats" [data]="countryStats.countryData"></app-diagramme>
+<ng-container *ngIf="countryStatistics">
+  <app-title-custom [title]="countryStatistics.country" />
+  <app-info-bar [datas]="[
+        { title: 'Number of entries', value: countryStatistics.totalParticipations},
+        { title: 'Total number of medals', value: countryStatistics.totalMedals},
+       { title: 'Total number of athletes', value: countryStatistics.totalAthletes}
+]" />
+ <app-diagramme [data]="countryStatistics.countryData"></app-diagramme>
+</ng-container>
 
 <div class="menu">
   <app-button-custom></app-button-custom>
