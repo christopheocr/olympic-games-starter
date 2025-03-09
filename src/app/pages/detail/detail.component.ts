@@ -32,11 +32,9 @@ export class DetailComponent implements OnInit{
 
     this.detailService.getCountryStatistics(this.countryNameParam).subscribe(data => {
       if (!data.countryData) {
-          console.error("Pays introuvable");
           this.router.navigate(['/not-found']);
          return;
       } else {
-          console.log("Données trouvées :", data);
           this.countryStatistics = data;
       }
   });

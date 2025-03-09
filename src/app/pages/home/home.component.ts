@@ -1,3 +1,4 @@
+import { Olympic } from './../../core/models/Olympic';
 import { Component, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { HomePageService } from 'src/app/core/services/home-page.service';
@@ -11,7 +12,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class HomeComponent implements OnInit {
 
-  public olympics$: Observable<any> = of(null);
+  public olympics$: Observable<Olympic[] | null> = of(null);
   public homeData$!: Observable<{
     elements: { name: string; value: number }[];
     numberJOs: number;
