@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit{
   }
 
   onSelect(event: {name: string,value: number,label: string}): void {
-    //console.log(event.name.trim().replace(/\s+/g, '').toLowerCase())
     this.router.navigate(["/details/"+event.name.trim().replace(/\s+/g, '').toLowerCase()]);
  }
 

@@ -8,10 +8,11 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { TitleCustomComponent } from "./components/title-custom/title-custom.component";
 import { InfoBarComponent } from "./components/info-bar/info-bar.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TitleCustomComponent, InfoBarComponent, DashboardComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TitleCustomComponent, InfoBarComponent, DashboardComponent,BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
