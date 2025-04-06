@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit{
     this.dataList = this.participants;
   }
 
-  customTooltip(data: any): string {
+  customTooltip(data: { data: { label: string; value: number } }): string {
     return `<div class="custom-tooltip">
               <span class="tooltip-title">${data.data.label}</span><br>
               <span class="tooltip-value">🏅 ${data.data.value}</span>
